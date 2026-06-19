@@ -1,4 +1,5 @@
 // GestBiblioteca - Modulo de Prestamos
+// Extension: Delete con confirmacion POST y proteccion CSRF
 using Microsoft.AspNetCore.Mvc;
 using GestBibliotecaApp.Models;
 
