@@ -1,0 +1,38 @@
+@model GestBibliotecaApp.Models.Prestamo
+
+@{
+    ViewData["Title"] = "Eliminar Prestamo";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Eliminar Prestamo</h2>
+
+    <div class="alert alert-warning">
+        <strong>Atencion:</strong> Esta accion no se puede deshacer.
+        Confirma que deseas eliminar este registro.
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Estudiante</dt>
+        <dd class="col-sm-9">@Model.Estudiante</dd>
+
+        <dt class="col-sm-3">Libro</dt>
+        <dd class="col-sm-9">@Model.Libro</dd>
+
+        <dt class="col-sm-3">Fecha de Prestamo</dt>
+        <dd class="col-sm-9">@Model.FechaPrestamo.ToShortDateString()</dd>
+
+        <dt class="col-sm-3">Fecha de Devolucion</dt>
+        <dd class="col-sm-9">@Model.FechaDevolucion.ToShortDateString()</dd>
+
+        <dt class="col-sm-3">Estado</dt>
+        <dd class="col-sm-9">@Model.Estado</dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Confirmar eliminacion</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

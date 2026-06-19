@@ -1,0 +1,58 @@
+@model GestBibliotecaApp.Models.Prestamo
+
+@{
+    ViewData["Title"] = "Registrar Prestamo";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Registrar Prestamo</h2>
+
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label asp-for="Estudiante" class="form-label"></label>
+            <input asp-for="Estudiante" class="form-control"
+                   placeholder="Nombre completo del estudiante" />
+            <span asp-validation-for="Estudiante" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Libro" class="form-label"></label>
+            <input asp-for="Libro" class="form-control"
+                   placeholder="Titulo del libro" />
+            <span asp-validation-for="Libro" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="FechaPrestamo" class="form-label"></label>
+            <input asp-for="FechaPrestamo" class="form-control" type="date" />
+            <span asp-validation-for="FechaPrestamo" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="FechaDevolucion" class="form-label"></label>
+            <input asp-for="FechaDevolucion" class="form-control" type="date" />
+            <span asp-validation-for="FechaDevolucion" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Estado" class="form-label"></label>
+            <select asp-for="Estado" class="form-control">
+                <option value="">-- Seleccione un estado --</option>
+                <option value="Activo">Activo</option>
+                <option value="Devuelto">Devuelto</option>
+                <option value="Vencido">Vencido</option>
+                <option value="Renovado">Renovado</option>
+            </select>
+            <span asp-validation-for="Estado" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

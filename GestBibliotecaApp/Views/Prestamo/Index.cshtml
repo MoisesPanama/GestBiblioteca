@@ -1,0 +1,56 @@
+@model IEnumerable<GestBibliotecaApp.Models.Prestamo>
+
+@{
+    ViewData["Title"] = "Prestamos";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Gestion de Prestamos</h2>
+
+    <a asp-action="Create" class="btn btn-primary mb-3">+ Registrar Prestamo</a>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">No hay prestamos registrados aun.</div>
+    }
+    else
+    {
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Estudiante</th>
+                    <th>Libro</th>
+                    <th>F. Prestamo</th>
+                    <th>F. Devolucion</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.Id</td>
+                    <td>@p.Estudiante</td>
+                    <td>@p.Libro</td>
+                    <td>@p.FechaPrestamo.ToShortDateString()</td>
+                    <td>@p.FechaDevolucion.ToShortDateString()</td>
+                    <td>
+                        <span class="badge @(p.Estado == "Activo" ? "bg-success" :
+                                             p.Estado == "Vencido" ? "bg-danger" :
+                                             p.Estado == "Renovado" ? "bg-warning text-dark" :
+                                             "bg-secondary")">
+                            @p.Estado
+                        </span>
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@p.Id"
+                           class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</div>
