@@ -1,0 +1,47 @@
+@model IEnumerable<GestBibliotecaApp.Models.Producto>
+
+@{
+    ViewData["Title"] = "Productos";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Gestión de Productos</h2>
+
+    <a asp-action="Create" class="btn btn-primary mb-3">+ Agregar Producto</a>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">No hay productos registrados aún.</div>
+    }
+    else
+    {
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.Id</td>
+                    <td>@p.Nombre</td>
+                    <td>@p.Descripcion</td>
+                    <td>@p.Precio.ToString("C")</td>
+                    <td>@p.Stock</td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@p.Id"
+                           class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</div>
